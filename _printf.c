@@ -1,3 +1,13 @@
+#include <stdarg.h>
+#include <stdio.h>
+
+/**
+ * A _printf function that outputs a formatted string to stdout.
+ *
+ * @param format The format string.
+ * @param ... The variable arguments to format.
+ * @return The number of characters output.
+ */
 int _printf(const char *format, ...) {
     int count = 0;
     va_list args;
