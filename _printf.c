@@ -61,13 +61,13 @@ int process_format_specifier(const char **format_pointer, va_list args) {
 }
 
 /**
- * A custom printf function that outputs a formatted string to stdout.
+ * A printf function that outputs a formatted string to stdout.
  *
  * @param format The format string.
  * @param ... The variable arguments to format.
  * @return The number of characters output.
  */
-int custom_printf(const char *format, ...) {
+int _printf(const char *format, ...) {
     int characters_printed = 0;
     va_list args;
     va_start(args, format); // Start processing the variable arguments
