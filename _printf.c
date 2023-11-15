@@ -1,65 +1,61 @@
-#include main.h"
+#include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
 /**
-* _printf - Outputs a formatted string to stdout.
-* @format: The format string.
-* @...: The variable arguments to format.
-* Return: The number of characters output.
-*/
+ * _printf function that outputs a formatted string to stdout.
+ * @param format The format string.
+ * @param ... The variable arguments to format.
+ * @return The number of characters output.
+ */
 int _printf(const char *format, ...)
 {
-	if (!format)
-		return (-1);
-
 	int count = 0;
 	va_list args;
 
 	va_start(args, format);
+
 	while (*format)
 	{
-	if (*format == '%' && *(format + 1))
-	{
-	format++;
-	switch (*format)
-	{
-	case 'c':
-	count += _putchar(va_arg(args, int));
-	break;
-	case 's':
-	count += _print_str(va_arg(args, const char *));
-	break;
-	case '%':
-	count += _putchar('%');
-	break;
-	default:
-	count += _putchar('%') + _putchar(*format);
+		if (*format == '%' && *(format + 1))
+		{
+			format++;
+			switch (*format)
+			{
+				case 'c': {
+						  char c = (char)va_arg(args, int);
+
+						  _putchar(c);
+						  count++;
 	break;
 	}
-	}
-	else
-		count += _putchar(*format);
-	format++;
+				case 's':
+	{
+	const char *s = va_arg(args, const char *);
+
+						  while (*s)
+						  {
+							  _putchar(*s++);
+							  count++;
+						  }
+						  break;
+					  }
+				case '%':
+					  _putchar('%');
+					  count++;
+					  break;
+				default:
+					  _putchar('%');
+					  _putchar(*format);
+					  count += 2;
+					  break;
+			}
+		} else
+		{
+			_putchar(*format);
+			count++;
+		}
+		format++;
 	}
 	va_end(args);
-	return (count);
-}
-
-/**
-* _print_str - Writes a string to stdout.
-* @str: The string to be written.
-* Return: The number of characters written.
-*/
-int _print_str(const char *str)
-{
-	if (!str)
-		str = "(null)";
-	int count = 0;
-
-	while (*str)
-	{
-	count += _putchar(*str);
-	str++;
-	}
 	return (count);
 }
