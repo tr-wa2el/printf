@@ -1,61 +1,61 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
-/**
- * _printf function that outputs a formatted string to stdout.
- * @param format The format string.
- * @param ... The variable arguments to format.
- * @return The number of characters output.
- */
+
 int _printf(const char *format, ...)
 {
-	int count = 0;
-	va_list args;
+    if (!format)
+        return -1;
 
-	va_start(args, format);
+    int count = 0;
+    va_list args;
+    va_start(args, format);
 
-	while (*format)
-	{
-		if (*format == '%' && *(format + 1))
-		{
-			format++;
-			switch (*format)
-			{
-				case 'c': {
-						  char c = (char)va_arg(args, int);
+    while (*format)
+    {
+        if (*format == '%' && *(format + 1))
+        {
+            format++;
+            switch (*format)
+            {
+                case 'c':
+                    count += _putchar(va_arg(args, int));
+                    break;
 
-						  _putchar(c);
-						  count++;
-	break;
-	}
-				case 's':
-	{
-	const char *s = va_arg(args, const char *);
+                case 's':
+                    count += _print_str(va_arg(args, const char *));
+                    break;
 
-						  while (*s)
-						  {
-							  _putchar(*s++);
-							  count++;
-						  }
-						  break;
-					  }
-				case '%':
-					  _putchar('%');
-					  count++;
-					  break;
-				default:
-					  _putchar('%');
-					  _putchar(*format);
-					  count += 2;
-					  break;
-			}
-		} else
-		{
-			_putchar(*format);
-			count++;
-		}
-		format++;
-	}
-	va_end(args);
-	return (count);
+                case '%':
+                    count += _putchar('%');
+                    break;
+
+                default:
+                    count += _putchar('%') + _putchar(*format);
+                    break;
+            }
+        }
+        else
+            count += _putchar(*format);
+
+        format++;
+    }
+
+    va_end(args);
+    return count;
+}
+
+int _print_str(const char *str)
+{
+    if (!str)
+        str = "(null)";
+
+    int count = 0;
+    while (*str)
+    {
+        count += _putchar(*str);
+        str++;
+    }
+
+    return (count);
 }
