@@ -1,12 +1,13 @@
-#include main.h"
+#include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
+
 /**
-* _printf - Outputs a formatted string to stdout.
-* @format: The format string.
-* @...: The variable arguments to format.
-* Return: The number of characters output.
-*/
+ * _printf - Outputs a formatted string to stdout.
+ * @format: The format string.
+ * @...: The variable arguments to format.
+ * Return: The number of characters output.
+ */
 int _printf(const char *format, ...)
 {
 	if (!format)
@@ -45,11 +46,12 @@ int _printf(const char *format, ...)
 	return (count);
 }
 
+
 /**
-* _print_str - Writes a string to stdout.
-* @str: The string to be written.
-* Return: The number of characters written.
-*/
+ * _print_str - Writes a string to stdout.
+ * @str: The string to be written.
+ * Return: The number of characters written.
+ */
 int _print_str(const char *str)
 {
 	if (!str)
